@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 import java.time.LocalTime;
+import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -27,8 +28,11 @@ public class Library {
     private String address;
 
     @Column(name = "open_time")
-    private LocalTime open_time;
+    private LocalTime openTime;
 
     @Column(name = "close_time")
-    private LocalTime close_time;
+    private LocalTime closeTime;
+
+    @OneToMany(mappedBy = "book")
+    private List<BookLibraryRef> bookLibraryRefs;
 }

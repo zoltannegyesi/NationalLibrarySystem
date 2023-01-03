@@ -8,7 +8,9 @@ import org.hibernate.annotations.Type;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,6 +19,7 @@ import java.time.LocalDate;
 public class Book {
 
     @Id
+    @Column(name = "isbn", length = 13)
     private String isbn;
 
     @Column(name = "eto")
@@ -40,5 +43,8 @@ public class Book {
     @Column(name = "description")
     @Type(type = "hu.nye.national_library_system.customtype.type.LongString")
     private String description;
+
+    @OneToMany(mappedBy = "library")
+    private List<BookLibraryRef> bookLibraryRefs;
 
 }
