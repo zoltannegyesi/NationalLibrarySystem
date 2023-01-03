@@ -3,6 +3,7 @@ package hu.nye.national_library_system.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,8 +38,7 @@ public class Book {
     private Long price;
 
     @Column(name = "description")
-    private ;
+    @Type(type = "hu.nye.national_library_system.customtype.type.LongString")
+    private String description;
 
-    @Column(name = "")
-    private ;
 }
