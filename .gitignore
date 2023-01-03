@@ -23,7 +23,11 @@
 hs_err_pid*
 
 # IntelliJ
-.idea
+.idea/
 HELP.md
 mvnw
 mvnw.cmd
+
+# Maven
+target/
+
