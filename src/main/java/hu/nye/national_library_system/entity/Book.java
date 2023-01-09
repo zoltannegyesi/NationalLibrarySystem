@@ -1,5 +1,7 @@
 package hu.nye.national_library_system.entity;
 
+import hu.nye.national_library_system.data.BookData;
+import hu.nye.national_library_system.util.ValueConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,7 +26,7 @@ public class Book {
     private String isbn;
 
     @Column(name = "eto")
-    private Double eto;
+    private BigDecimal eto;
 
     @Column(name = "title", length = 100)
     private String title;
@@ -45,6 +48,22 @@ public class Book {
     private String description;
 
     @OneToMany(mappedBy = "library")
-    private List<BookLibraryRef> bookLibraryRefs;
+    private List<BookLibraryRef> bookLibraryRefList;
 
+
+    public Book(BookData bookData) {
+        apply(bookData);
+    }
+
+    public void apply(BookData bookData) {
+        this.isbn = ValueConverter.getStringValue(bookData.getIsbn(), this.isbn);
+        this.eto = ValueConverter.getFractionValue(bookData.getEto(), this.eto);
+        this.title = ValueConverter.getStringValue(bookData.getTitle(), this.title);
+        this.author = ValueConverter.getStringValue(bookData.getAuthor(), this.title);
+        this.releaseDate = ValueConverter.getDateValue(ValueConverter.stringToLocalDate(bookData.getReleaseDate()), this.releaseDate);
+        this.numberOfPages = ValueConverter.getNumberValue(bookData.getNumberOfPages(), this.numberOfPages);
+        this.price = ValueConverter.getNumberValue(bookData.getPrice(), this.price);
+        this.description = ValueConverter.getLongStringValue(bookData.getDescription(), this.description);
+        this.bookLibraryRefList = ValueConverter.getBookLibraryRefList(bookData.getBookLibraryRefDataList(), this.bookLibraryRefList);
+    }
 }
