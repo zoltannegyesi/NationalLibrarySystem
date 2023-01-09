@@ -1,5 +1,7 @@
 package hu.nye.national_library_system.entity;
 
+import hu.nye.national_library_system.data.LibraryData;
+import hu.nye.national_library_system.util.ValueConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,5 +36,17 @@ public class Library {
     private LocalTime closeTime;
 
     @OneToMany(mappedBy = "book")
-    private List<BookLibraryRef> bookLibraryRefs;
+    private List<BookLibraryRef> bookLibraryRefList;
+
+    public Library(LibraryData libraryData) {
+        apply(libraryData);
+    }
+
+    public void apply(LibraryData libraryData) {
+        this.name = ValueConverter.getStringValue(libraryData.getName(), this.name);
+        this.address = ValueConverter.getStringValue(libraryData.getAddress(), this.address);
+        this.openTime = ValueConverter.getTimeValue(ValueConverter.stringToLocalTime(libraryData.getOpenTime()), this.openTime);
+        this.closeTime = ValueConverter.getTimeValue(ValueConverter.stringToLocalTime(libraryData.getCloseTime()), this.closeTime);
+        this.bookLibraryRefList = ValueConverter.getBookLibraryRefList(libraryData.getBookLibraryRefDataList(), this.bookLibraryRefList);
+    }
 }
