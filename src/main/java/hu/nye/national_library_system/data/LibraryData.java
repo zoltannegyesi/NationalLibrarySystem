@@ -1,5 +1,6 @@
 package hu.nye.national_library_system.data;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import hu.nye.national_library_system.entity.BookLibraryRef;
 import hu.nye.national_library_system.entity.Library;
 import hu.nye.national_library_system.util.JSONConverter;
@@ -34,5 +35,9 @@ public class LibraryData {
         this.openTime = JSONConverter.localTimeToString(library.getOpenTime());
         this.closeTime = JSONConverter.localTimeToString(library.getCloseTime());
         this.bookLibraryRefDataList = JSONConverter.getBookLibraryRef(library.getBookLibraryRefList());
+    }
+
+    public LibraryData(ObjectNode changes) {
+        //TODO
     }
 }
