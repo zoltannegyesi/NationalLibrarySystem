@@ -19,6 +19,14 @@ import static javax.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 public class Library {
 
+    public static final String TYPE_NAME = "Library";
+    public static final String FIELD_NAME_ID = "id";
+    public static final String FIELD_NAME_NAME = "name";
+    public static final String FIELD_NAME_ADDRESS = "address";
+    public static final String FIELD_NAME_OPEN_TIME = "openTime";
+    public static final String FIELD_NAME_CLOSE_TIME = "closeTime";
+    public static final String FIELD_NAME_BOOK_LIBRARY_REF_LIST = "bookLibraryRefList";
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
