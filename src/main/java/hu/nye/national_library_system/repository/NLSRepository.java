@@ -1,10 +1,13 @@
 package hu.nye.national_library_system.repository;
 
+import hu.nye.national_library_system.filter.Filter;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
+
+import static hu.nye.national_library_system.Constants.SET_AUTOINCREMENT;
 
 
 public class NLSRepository {

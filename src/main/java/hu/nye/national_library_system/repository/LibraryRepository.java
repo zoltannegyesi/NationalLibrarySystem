@@ -1,6 +1,7 @@
 package hu.nye.national_library_system.repository;
 
 import hu.nye.national_library_system.entity.Library;
+import hu.nye.national_library_system.filter.Filter;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
