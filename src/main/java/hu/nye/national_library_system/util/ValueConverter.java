@@ -7,6 +7,8 @@ import hu.nye.national_library_system.entity.Book;
 import hu.nye.national_library_system.entity.BookLibraryRef;
 import hu.nye.national_library_system.entity.Library;
 import org.hibernate.engine.jdbc.internal.BinaryStreamImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.sql.Blob;
@@ -17,6 +19,8 @@ import java.time.LocalTime;
 import java.util.List;
 
 public class ValueConverter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ValueConverter.class);
 
     private ValueConverter() {
     }
@@ -29,8 +33,7 @@ public class ValueConverter {
         try {
             return new String(value.getBytes(1, (int) value.length()));
         } catch (SQLException e) {
-            //TODO: logger
-            // LOGGER.error("Error durring convertion: ", e);
+             LOGGER.error("Error durring convertion: ", e);
             return null;
         }
     }
