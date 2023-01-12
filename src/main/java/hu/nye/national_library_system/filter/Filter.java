@@ -1,5 +1,6 @@
 package hu.nye.national_library_system.filter;
 
+import hu.nye.national_library_system.etc.QueryOperator;
 import lombok.Data;
 
 import javax.persistence.criteria.CriteriaBuilder;
