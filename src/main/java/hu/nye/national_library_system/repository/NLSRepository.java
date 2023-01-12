@@ -2,9 +2,10 @@ package hu.nye.national_library_system.repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
-import java.util.function.Predicate;
+
 
 public class NLSRepository {
 
@@ -17,8 +18,9 @@ public class NLSRepository {
         arrayField.forEach(em::persist);
     }
 
-    protected void setNextId(EntityManager em, String type, Long value) {
+    protected <T> void setNextId(EntityManager em, String type, T value) {
         em.clear();
         em.createNativeQuery(String.format(SET_AUTOINCREMENT, type.toLowerCase(), value)).executeUpdate();
     }
+
 }
