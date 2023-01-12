@@ -1,7 +1,6 @@
 package hu.nye.national_library_system.repository;
 
 import hu.nye.national_library_system.entity.Library;
-import hu.nye.national_library_system.filter.Filter;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
@@ -53,18 +51,17 @@ public class LibraryRepository extends NLSRepository{
         return em.find(Library.class, id) == null;
     }
 
-    public List<Library> findAll(List<Filter<?>> filters) {
+    public List<Library> findAll() {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Library> cq = criteriaBuilder.createQuery(Library.class);
         Root<Library> library = cq.from(Library.class);
-        Predicate[] filterPredicates = getPredicates(filters, criteriaBuilder, library);
-        cq.distinct(true).where(filterPredicates).
+        cq.distinct(true).
                 orderBy(criteriaBuilder.asc(library.get(Library.FIELD_NAME_NAME)));
         TypedQuery<Library> query = em.createQuery(cq);
         return query.getResultList();
     }
 
-    public Library getById(String id) {
+    public Library getById(Long id) {
         return em.find(Library.class, id);
     }
 
