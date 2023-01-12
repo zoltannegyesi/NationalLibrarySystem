@@ -1,7 +1,6 @@
 package hu.nye.national_library_system.repository;
 
 import hu.nye.national_library_system.entity.Book;
-import hu.nye.national_library_system.filter.Filter;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,13 +52,12 @@ public class BookRepository extends NLSRepository{
         return em.find(Book.class, id) == null;
     }
 
-    public List<Book> findAll(List<Filter<?>> filters) {
+    public List<Book> findAll() {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Book> cq = criteriaBuilder.createQuery(Book.class);
         Root<Book> book = cq.from(Book.class);
-        Predicate[] filterPredicates = getPredicates(filters, criteriaBuilder, book);
-        cq.distinct(true).where(filterPredicates).
-        orderBy(criteriaBuilder.asc(book.get(Book.FIELD_NAME_ISBN)));
+        cq.distinct(true).
+            orderBy(criteriaBuilder.asc(book.get(Book.FIELD_NAME_ISBN)));
         TypedQuery<Book> query = em.createQuery(cq);
         return query.getResultList();
     }
