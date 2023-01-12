@@ -61,7 +61,7 @@ public class LibraryRepository extends NLSRepository{
         return query.getResultList();
     }
 
-    public Library getById(String id) {
+    public Library getById(Long id) {
         return em.find(Library.class, id);
     }
 
