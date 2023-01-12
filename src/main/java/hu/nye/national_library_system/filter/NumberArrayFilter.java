@@ -7,11 +7,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.math.BigDecimal;
 
-public class FractionArrayFilter extends Filter<BigDecimal> {
+public class NumberArrayFilter extends Filter<Long> {
 
-    public FractionArrayFilter(String fieldName, QueryOperator queryOperator, BigDecimal value) {
+    public NumberArrayFilter(String fieldName, QueryOperator queryOperator, Long value) {
         super(fieldName, queryOperator, value);
     }
 

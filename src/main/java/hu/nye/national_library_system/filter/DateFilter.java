@@ -1,6 +1,5 @@
 package hu.nye.national_library_system.filter;
 
-import hu.nye.national_library_system.Constants;
 import hu.nye.national_library_system.etc.QueryOperator;
 
 import javax.persistence.criteria.*;
