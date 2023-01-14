@@ -1,5 +1,7 @@
 package hu.nye.national_library_system.entity;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import hu.nye.national_library_system.data.LibraryData;
 import hu.nye.national_library_system.util.ValueConverter;
 import lombok.AllArgsConstructor;
@@ -7,11 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
 import java.time.LocalTime;
 import java.util.List;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Data

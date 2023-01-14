@@ -4,17 +4,11 @@ import static hu.nye.national_library_system.entity.Book.*;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import hu.nye.national_library_system.entity.Book;
-import hu.nye.national_library_system.entity.BookLibraryRef;
 import hu.nye.national_library_system.util.JSONConverter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 @Data

@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import hu.nye.national_library_system.data.BookData;
 import hu.nye.national_library_system.entity.Book;
 import hu.nye.national_library_system.service.BookService;
-import hu.nye.national_library_system.validation.ValidationException;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +13,12 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/NationalLibrarySystem/Book")
 @Transactional
-public class BookController extends NLSController{
+public class BookController {
 
     private final BookService bookService;
 
     @Autowired
     public BookController(BookService bookService) {
-        super(LoggerFactory.getLogger(BookController.class));
         this.bookService = bookService;
     }
 
@@ -39,14 +36,14 @@ public class BookController extends NLSController{
 
     @PostMapping
     @ResponseBody
-    public Mono<BookData> save(@RequestBody BookData data) throws ValidationException {
+    public Mono<BookData> save(@RequestBody BookData data) {
         Book book = new Book(data);
         return bookService.save(book).map(BookData::new);
     }
 
     @PutMapping("/{id}")
     @ResponseBody
-    public Mono<BookData> update(@PathVariable("id") String id, @RequestBody BookData changes) throws ValidationException {
+    public Mono<BookData> update(@PathVariable("id") String id, @RequestBody BookData changes) {
         Book book = bookService.load(id).block();
         if (book == null) {
             return null;
@@ -57,7 +54,7 @@ public class BookController extends NLSController{
 
     @PatchMapping("/{id}")
     @ResponseBody
-    public Mono<BookData> patch(@PathVariable("id") String id, @RequestBody ObjectNode changes) throws ValidationException{
+    public Mono<BookData> patch(@PathVariable("id") String id, @RequestBody ObjectNode changes) {
         return this.update(id, new BookData(changes));
     }
 
