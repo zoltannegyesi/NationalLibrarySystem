@@ -4,7 +4,6 @@ import hu.nye.national_library_system.util.ValueConverter;
 import org.hibernate.type.descriptor.WrapperOptions;
 import org.hibernate.type.descriptor.java.AbstractTypeDescriptor;
 import org.hibernate.type.descriptor.java.ImmutableMutabilityPlan;
-import org.springframework.stereotype.Component;
 
 import java.sql.Blob;
 

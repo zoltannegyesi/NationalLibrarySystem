@@ -1,9 +1,9 @@
 package hu.nye.national_library_system.repository;
 
+import static hu.nye.national_library_system.Constants.SET_AUTOINCREMENT;
+
 import javax.persistence.EntityManager;
 import java.util.List;
-
-import static hu.nye.national_library_system.Constants.SET_AUTOINCREMENT;
 
 
 public class NLSRepository {

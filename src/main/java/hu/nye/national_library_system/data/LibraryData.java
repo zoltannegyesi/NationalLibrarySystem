@@ -3,15 +3,11 @@ package hu.nye.national_library_system.data;
 import static hu.nye.national_library_system.entity.Library.*;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import hu.nye.national_library_system.entity.BookLibraryRef;
 import hu.nye.national_library_system.entity.Library;
 import hu.nye.national_library_system.util.JSONConverter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import java.time.LocalTime;
 import java.util.List;
 
 @Data

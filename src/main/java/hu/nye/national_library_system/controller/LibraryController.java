@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import hu.nye.national_library_system.data.LibraryData;
 import hu.nye.national_library_system.entity.Library;
 import hu.nye.national_library_system.service.LibraryService;
-import hu.nye.national_library_system.validation.ValidationException;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +13,12 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/NationalLibrarySystem/Library")
 @Transactional
-public class LibraryController extends NLSController{
+public class LibraryController {
 
     private final LibraryService libraryService;
 
     @Autowired
     public LibraryController(LibraryService libraryService) {
-        super(LoggerFactory.getLogger(LibraryController.class));
         this.libraryService = libraryService;
     }
 
@@ -39,14 +36,14 @@ public class LibraryController extends NLSController{
 
     @PostMapping
     @ResponseBody
-    public Mono<LibraryData> save(@RequestBody LibraryData data) throws ValidationException {
+    public Mono<LibraryData> save(@RequestBody LibraryData data){
         Library library = new Library(data);
         return libraryService.save(library).map(LibraryData::new);
     }
 
     @PutMapping("/{id}")
     @ResponseBody
-    public Mono<LibraryData> update(@PathVariable("id") Long id, @RequestBody LibraryData changes) throws ValidationException {
+    public Mono<LibraryData> update(@PathVariable("id") Long id, @RequestBody LibraryData changes) {
         Library library = libraryService.load(id).block();
         if (library == null) {
             return null;
@@ -57,7 +54,7 @@ public class LibraryController extends NLSController{
 
     @PatchMapping("/{id}")
     @ResponseBody
-    public Mono<LibraryData> patch(@PathVariable("id") Long id, @RequestBody ObjectNode changes) throws ValidationException{
+    public Mono<LibraryData> patch(@PathVariable("id") Long id, @RequestBody ObjectNode changes){
         return this.update(id, new LibraryData(changes));
     }
 
