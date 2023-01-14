@@ -17,6 +17,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class BookLibraryRef implements Serializable {
 
+    public static final String FIELD_NAME_BOOK_ISBN = "bookIsbn";
+    public static final String FIELD_NAME_LIBRARY_ID = "libraryId";
+    public static final String FIELD_NAME_AVAILABLE = "available";
+    public static final String FIELD_NAME_LENDING_DATE = "lendingDate";
+
     @EmbeddedId
     private BookLibraryRefPK id;
 

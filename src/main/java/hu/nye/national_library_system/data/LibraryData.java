@@ -1,5 +1,7 @@
 package hu.nye.national_library_system.data;
 
+import static hu.nye.national_library_system.entity.Library.*;
+
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import hu.nye.national_library_system.entity.BookLibraryRef;
 import hu.nye.national_library_system.entity.Library;
@@ -38,6 +40,10 @@ public class LibraryData {
     }
 
     public LibraryData(ObjectNode changes) {
-        //TODO
+        this.name = JSONConverter.getString(changes.get(FIELD_NAME_NAME));
+        this.address = JSONConverter.getString(changes.get(FIELD_NAME_ADDRESS));
+        this.openTime = JSONConverter.getTime(changes.get(FIELD_NAME_OPEN_TIME));
+        this.closeTime = JSONConverter.getTime(changes.get(FIELD_NAME_CLOSE_TIME));
+        this.bookLibraryRefDataList = JSONConverter.getBookLibraryRefArray(changes.get(FIELD_NAME_BOOK_LIBRARY_REF_LIST));
     }
 }
