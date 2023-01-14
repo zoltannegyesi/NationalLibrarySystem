@@ -56,4 +56,8 @@ public class Library {
         this.closeTime = ValueConverter.getTimeValue(ValueConverter.stringToLocalTime(libraryData.getCloseTime()), this.closeTime);
         this.bookLibraryRefList = ValueConverter.getBookLibraryRefList(libraryData.getBookLibraryRefDataList(), this.bookLibraryRefList);
     }
+
+    public void setArrayFieldIds(Long id) {
+        this.bookLibraryRefList = ValueConverter.setBookLibraryRefListIds(bookLibraryRefList, null, id);
+    }
 }

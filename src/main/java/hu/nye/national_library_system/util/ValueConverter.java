@@ -87,14 +87,40 @@ public class ValueConverter {
     }
 
     public static LocalDate stringToLocalDate(String value) {
-        return null;
+        if (value == null) {
+            return null;
+        }
+        // LocalDates are 10 characters long.
+        return LocalDate.parse(value.substring(0, 10));
     }
 
     public static LocalTime stringToLocalTime(String value) {
-        return null;
+        if (value == null) {
+            return null;
+        }
+        return LocalTime.parse(value);
     }
 
     public static LocalDateTime stringToLocalDateTime(String value) {
-        return null;
+        if (value == null) {
+            return null;
+        }
+        // LocalDateTimes are 16 characters long.
+        return LocalDateTime.parse(correctDateString(value.substring(0, 16)));
+    }
+
+    private static String correctDateString(String original) {
+        if (original.contains(" ")) {
+            return original.replace(" ", "T");
+        }
+        return original;
+    }
+
+    public static List<BookLibraryRef> setBookLibraryRefListIds(List<BookLibraryRef> bookLibraryRefList, String bookIsbn, Long libraryId) {
+        bookLibraryRefList.forEach(ref -> {
+            ref.getId().setBookIsbn(bookIsbn);
+            ref.getId().setLibraryId(libraryId);
+        });
+        return bookLibraryRefList;
     }
 }

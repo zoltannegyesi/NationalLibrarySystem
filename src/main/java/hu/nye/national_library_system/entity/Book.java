@@ -77,4 +77,8 @@ public class Book {
         this.description = ValueConverter.getLongStringValue(bookData.getDescription(), this.description);
         this.bookLibraryRefList = ValueConverter.getBookLibraryRefList(bookData.getBookLibraryRefDataList(), this.bookLibraryRefList);
     }
+
+    public void setArrayFieldIds(String isbn) {
+        this.bookLibraryRefList = ValueConverter.setBookLibraryRefListIds(bookLibraryRefList, isbn, null);
+    }
 }
