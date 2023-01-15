@@ -1,5 +1,7 @@
 package hu.nye.national_library_system.entity;
 
+import static hu.nye.national_library_system.KeyTypeConstants.*;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 import hu.nye.national_library_system.data.LibraryData;
@@ -7,6 +9,7 @@ import hu.nye.national_library_system.util.ValueConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalTime;
@@ -31,15 +34,23 @@ public class Library {
     private Long id;
 
     @Column(name = "name", length = 100)
+    @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedString", parameters = {
+            @org.hibernate.annotations.Parameter(name = KEY_TYPE, value = GROUP_WIDE)})
     private String name;
 
     @Column(name = "address", length = 100)
+    @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedString", parameters = {
+            @org.hibernate.annotations.Parameter(name = KEY_TYPE, value = SYSTEM_WIDE)})
     private String address;
 
     @Column(name = "open_time")
+    @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedTime", parameters = {
+            @org.hibernate.annotations.Parameter(name = KEY_TYPE, value = GROUP_WIDE)})
     private LocalTime openTime;
 
     @Column(name = "close_time")
+    @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedTime", parameters = {
+            @org.hibernate.annotations.Parameter(name = KEY_TYPE, value = USER_WIDE)})
     private LocalTime closeTime;
 
     @OneToMany(mappedBy = "book")
