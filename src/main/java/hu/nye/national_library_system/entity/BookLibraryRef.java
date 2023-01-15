@@ -1,11 +1,14 @@
 package hu.nye.national_library_system.entity;
 
+import static hu.nye.national_library_system.KeyTypeConstants.*;
+
 import hu.nye.national_library_system.data.BookLibraryRefData;
 import hu.nye.national_library_system.entity.pk.BookLibraryRefPK;
 import hu.nye.national_library_system.util.ValueConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -36,9 +39,13 @@ public class BookLibraryRef implements Serializable {
     private Library library;
 
     @Column(name = "available",  columnDefinition = "TINYINT(1)")
+    @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedBoolean", parameters = {
+            @org.hibernate.annotations.Parameter(name = KEY_TYPE, value = GROUP_WIDE)})
     private Boolean available;
 
     @Column(name = "lending_date")
+    @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedTimestamp", parameters = {
+            @org.hibernate.annotations.Parameter(name = KEY_TYPE, value = USER_WIDE)})
     private LocalDateTime lending_date;
 
     public BookLibraryRef(BookLibraryRefData bookLibraryRefData) {

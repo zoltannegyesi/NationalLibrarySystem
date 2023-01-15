@@ -1,10 +1,13 @@
 package hu.nye.national_library_system.entity;
 
+import static hu.nye.national_library_system.KeyTypeConstants.*;
+
 import hu.nye.national_library_system.data.BookData;
 import hu.nye.national_library_system.util.ValueConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
@@ -37,25 +40,38 @@ public class Book {
     private String isbn;
 
     @Column(name = "eto")
+    @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedFraction", parameters = {
+            @Parameter(name = KEY_TYPE, value = GROUP_WIDE)})
     private BigDecimal eto;
 
     @Column(name = "title", length = 100)
+    @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedString", parameters = {
+            @Parameter(name = KEY_TYPE, value = USER_WIDE)})
     private String title;
 
     @Column(name = "author", length = 100)
+    @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedString", parameters = {
+            @Parameter(name = KEY_TYPE, value = GROUP_WIDE)})
     private String author;
 
     @Column(name = "release_date")
+    @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedDate", parameters = {
+            @Parameter(name = KEY_TYPE, value = USER_WIDE)})
     private LocalDate releaseDate;
 
     @Column(name = "number_of_pages")
+    @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedNumber", parameters = {
+            @Parameter(name = KEY_TYPE, value = SYSTEM_WIDE)})
     private Long numberOfPages;
 
     @Column(name = "price")
+    @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedNumber", parameters = {
+            @Parameter(name = KEY_TYPE, value = USER_WIDE)})
     private Long price;
 
     @Column(name = "description")
-    @Type(type = "hu.nye.national_library_system.customtype.type.LongString")
+    @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedLongString", parameters = {
+            @Parameter(name = KEY_TYPE, value = SYSTEM_WIDE)})
     private String description;
 
     @OneToMany(mappedBy = "library")
