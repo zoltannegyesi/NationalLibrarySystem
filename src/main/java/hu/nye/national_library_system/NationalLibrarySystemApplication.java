@@ -14,10 +14,10 @@ public class NationalLibrarySystemApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = SpringApplication.run(NationalLibrarySystemApplication.class, args);
-		setSessionKeys(applicationContext);
+		setKeys(applicationContext);
 	}
 
-	private static void setSessionKeys(ApplicationContext applicationContext) {
+	private static void setKeys(ApplicationContext applicationContext) {
 		KeyHolder keyHolder = applicationContext.getBean(KeyHolder.class);
 		keyHolder.setUserWideKey(userPassword);
 		keyHolder.setGroupWideKey(groupPassword);
