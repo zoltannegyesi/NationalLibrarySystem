@@ -3,7 +3,7 @@ package hu.nye.national_library_system.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hu.nye.national_library_system.Constants;
+import hu.nye.national_library_system.constant.Constants;
 import hu.nye.national_library_system.data.BookData;
 import hu.nye.national_library_system.data.BookLibraryRefData;
 import hu.nye.national_library_system.data.LibraryData;

@@ -1,4 +1,4 @@
-package hu.nye.national_library_system;
+package hu.nye.national_library_system.key;
 
 public class KeyTypeConstants {
 

@@ -1,8 +1,8 @@
 package hu.nye.national_library_system.customtype.descriptor;
 
-import static hu.nye.national_library_system.KeyTypeConstants.*;
+import static hu.nye.national_library_system.key.KeyTypeConstants.*;
 
-import hu.nye.national_library_system.KeyHolder;
+import hu.nye.national_library_system.key.KeyHolder;
 import org.hibernate.type.descriptor.java.AbstractTypeDescriptor;
 import org.hibernate.type.descriptor.java.ImmutableMutabilityPlan;
 import org.slf4j.Logger;
