@@ -1,6 +1,6 @@
 package hu.nye.national_library_system.entity;
 
-import static hu.nye.national_library_system.KeyTypeConstants.*;
+import static hu.nye.national_library_system.key.KeyTypeConstants.*;
 
 import hu.nye.national_library_system.data.BookData;
 import hu.nye.national_library_system.util.ValueConverter;

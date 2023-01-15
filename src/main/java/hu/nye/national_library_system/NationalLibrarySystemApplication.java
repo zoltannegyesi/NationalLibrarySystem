@@ -1,10 +1,9 @@
 package hu.nye.national_library_system;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import hu.nye.national_library_system.key.KeyHolder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
 @SpringBootApplication
 public class NationalLibrarySystemApplication {

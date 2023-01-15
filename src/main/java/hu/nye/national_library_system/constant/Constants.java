@@ -1,4 +1,4 @@
-package hu.nye.national_library_system;
+package hu.nye.national_library_system.constant;
 
 public class Constants {
     private Constants() {

@@ -1,6 +1,6 @@
 package hu.nye.national_library_system.entity;
 
-import static hu.nye.national_library_system.KeyTypeConstants.*;
+import static hu.nye.national_library_system.key.KeyTypeConstants.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
