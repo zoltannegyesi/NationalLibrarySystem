@@ -27,7 +27,7 @@ hs_err_pid*
 HELP.md
 mvnw
 mvnw.cmd
+*.iml
 
 # Maven
 target/
-
