@@ -39,7 +39,7 @@ public class AESUtil {
         this.iv = iv;
     }
 
-    private byte[] encrypt(String key, byte[] input) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
+    public byte[] encrypt(String key, byte[] input) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
             BadPaddingException, IllegalBlockSizeException, InvalidKeyException, InvalidKeySpecException {
         SecretKey secretKey = createSecretKey(algorithm);
         Cipher cipher = Cipher.getInstance(algorithm);
@@ -48,7 +48,7 @@ public class AESUtil {
         return Base64.getEncoder().encode(cipherText);
     }
 
-    private byte[] decrypt(String key, byte[] cipherText) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
+    public byte[] decrypt(String key, byte[] cipherText) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
             BadPaddingException, IllegalBlockSizeException, InvalidKeyException, InvalidKeySpecException {
         SecretKey secretKey = null;
         try {
@@ -62,7 +62,7 @@ public class AESUtil {
         return cipher.doFinal(Base64.getDecoder().decode(cipherText));
     }
 
-    private SecretKey createSecretKey(String input) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public SecretKey createSecretKey(String input) throws NoSuchAlgorithmException, InvalidKeySpecException {
         SecretKeyFactory factory = SecretKeyFactory.getInstance(secretKeyFactoryAlgorithm);
         KeySpec spec = new PBEKeySpec(input.toCharArray(), salt.getBytes(), 65536, 256);
         return new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES");
