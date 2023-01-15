@@ -1,6 +1,7 @@
 package hu.nye.national_library_system.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,6 +22,8 @@ public class BeanFactoryConfig {
 
     @Value("${security.customtypes.iv}")
     private String iv;
+
+    private ApplicationContext applicationContext;
 
     @Bean(name = "secretKeyFactoryAlgorithm")
     public String secretKeyFactoryAlgorithm() {
