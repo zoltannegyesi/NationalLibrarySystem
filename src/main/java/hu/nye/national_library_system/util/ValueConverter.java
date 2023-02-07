@@ -1,10 +1,10 @@
 package hu.nye.national_library_system.util;
 
 import hu.nye.national_library_system.data.BookData;
-import hu.nye.national_library_system.data.BookLibraryRefData;
+import hu.nye.national_library_system.data.LibraryBookData;
 import hu.nye.national_library_system.data.LibraryData;
 import hu.nye.national_library_system.entity.Book;
-import hu.nye.national_library_system.entity.BookLibraryRef;
+import hu.nye.national_library_system.entity.LibraryBook;
 import hu.nye.national_library_system.entity.Library;
 import org.hibernate.engine.jdbc.internal.BinaryStreamImpl;
 import org.slf4j.Logger;
@@ -82,7 +82,7 @@ public class ValueConverter {
         return value == null ?  defaultValue :  new Library(value);
     }
 
-    public static List<BookLibraryRef> getBookLibraryRefList(List<BookLibraryRefData> dataArrayField, List<BookLibraryRef> arrayField) {
+    public static List<LibraryBook> getBookLibraryRefList(List<LibraryBookData> dataArrayField, List<LibraryBook> arrayField) {
         return null;
     }
 
@@ -116,11 +116,11 @@ public class ValueConverter {
         return original;
     }
 
-    public static List<BookLibraryRef> setBookLibraryRefListIds(List<BookLibraryRef> bookLibraryRefList, String bookIsbn, Long libraryId) {
-        bookLibraryRefList.forEach(ref -> {
+    public static List<LibraryBook> setBookLibraryRefListIds(List<LibraryBook> libraryBookList, String bookIsbn, Long libraryId) {
+        libraryBookList.forEach(ref -> {
             ref.getId().setBookIsbn(bookIsbn);
             ref.getId().setLibraryId(libraryId);
         });
-        return bookLibraryRefList;
+        return libraryBookList;
     }
 }

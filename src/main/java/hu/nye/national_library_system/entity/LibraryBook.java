@@ -2,7 +2,7 @@ package hu.nye.national_library_system.entity;
 
 import static hu.nye.national_library_system.key.KeyTypeConstants.*;
 
-import hu.nye.national_library_system.data.BookLibraryRefData;
+import hu.nye.national_library_system.data.LibraryBookData;
 import hu.nye.national_library_system.entity.pk.BookLibraryRefPK;
 import hu.nye.national_library_system.util.ValueConverter;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookLibraryRef implements Serializable {
+public class LibraryBook implements Serializable {
 
     public static final String FIELD_NAME_BOOK_ISBN = "bookIsbn";
     public static final String FIELD_NAME_LIBRARY_ID = "libraryId";
@@ -48,16 +48,16 @@ public class BookLibraryRef implements Serializable {
             @org.hibernate.annotations.Parameter(name = KEY_TYPE, value = USER_WIDE)})
     private LocalDateTime lending_date;
 
-    public BookLibraryRef(BookLibraryRefData bookLibraryRefData) {
-        apply(bookLibraryRefData);
+    public LibraryBook(LibraryBookData libraryBookData) {
+        apply(libraryBookData);
     }
 
-    public void apply(BookLibraryRefData bookLibraryRefData) {
-        this.id.setBookIsbn(ValueConverter.getStringValue(bookLibraryRefData.getBookIsbn(), this.id.getBookIsbn()));
-        this.id.setLibraryId(ValueConverter.getNumberValue(bookLibraryRefData.getLibraryId(), this.id.getLibraryId()));
-        this.book = ValueConverter.getBookValue(bookLibraryRefData.getBookData(), this.book);
-        this.library = ValueConverter.getLibraryValue(bookLibraryRefData.getLibraryData(), this.library);
-        this.available = ValueConverter.getBooleanValue(bookLibraryRefData.getAvailable(), this.available);
-        this.lending_date = ValueConverter.getTimestampValue(ValueConverter.stringToLocalDateTime(bookLibraryRefData.getLending_date()), this.lending_date);
+    public void apply(LibraryBookData libraryBookData) {
+        this.id.setBookIsbn(ValueConverter.getStringValue(libraryBookData.getBookIsbn(), this.id.getBookIsbn()));
+        this.id.setLibraryId(ValueConverter.getNumberValue(libraryBookData.getLibraryId(), this.id.getLibraryId()));
+        this.book = ValueConverter.getBookValue(libraryBookData.getBookData(), this.book);
+        this.library = ValueConverter.getLibraryValue(libraryBookData.getLibraryData(), this.library);
+        this.available = ValueConverter.getBooleanValue(libraryBookData.getAvailable(), this.available);
+        this.lending_date = ValueConverter.getTimestampValue(ValueConverter.stringToLocalDateTime(libraryBookData.getLending_date()), this.lending_date);
     }
 }
