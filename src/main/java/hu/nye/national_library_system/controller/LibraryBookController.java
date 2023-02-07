@@ -44,12 +44,12 @@ public class LibraryBookController {
     @PutMapping("/{id}")
     @ResponseBody
     public Mono<LibraryBookData> update(@PathVariable("id") Long id, @RequestBody LibraryBookData changes) {
-        LibraryBook library = libraryBookService.load(id).block();
+        LibraryBook libraryBook = libraryBookService.load(id).block();
         if (library == null) {
             return null;
         }
-        library.apply(changes);
-        return libraryBookService.update(library).map(LibraryBookData::new);
+        libraryBook.apply(changes);
+        return libraryBookService.update(libraryBook).map(LibraryBookData::new);
     }
 
     @PatchMapping("/{id}")
