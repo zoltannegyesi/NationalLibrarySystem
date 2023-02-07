@@ -55,7 +55,7 @@ public class ValueConverter {
     }
 
     public static BigDecimal getFractionValue(BigDecimal value, BigDecimal defaultValue) {
-        return getValue(value, defaultValue.stripTrailingZeros());
+        return getValue(value, defaultValue).stripTrailingZeros();
     }
 
     public static Boolean getBooleanValue(Boolean value, Boolean defaultValue) {

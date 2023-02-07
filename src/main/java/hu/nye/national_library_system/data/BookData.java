@@ -31,28 +31,26 @@ public class BookData {
 
     private String description;
 
-    private List<BookLibraryRefData> bookLibraryRefDataList;
-
     public BookData(Book book) {
         this.isbn = JSONConverter.getString(book.getIsbn());
         this.eto = JSONConverter.getFraction(book.getEto());
+        this.title = JSONConverter.getString(book.getTitle());
         this.author = JSONConverter.getString(book.getAuthor());
         this.releaseDate = JSONConverter.localDateToString(book.getReleaseDate());
         this.numberOfPages = JSONConverter.getNumber(book.getNumberOfPages());
         this.price = JSONConverter.getNumber(book.getPrice());
         this.description = JSONConverter.getString(book.getDescription());
-        this.bookLibraryRefDataList = JSONConverter.getBookLibraryRef(book.getBookLibraryRefList());
     }
 
     public BookData(ObjectNode changes) {
         this.isbn = JSONConverter.getString(changes.get(FIELD_NAME_ISBN));
         this.eto = JSONConverter.getFraction(changes.get(FIELD_NAME_ETO));
+        this.title = JSONConverter.getString(changes.get(FIELD_NAME_TITLE));
         this.author = JSONConverter.getString(changes.get(FIELD_NAME_AUTHOR));
         this.releaseDate = JSONConverter.getDate(changes.get(FIELD_NAME_RELEASE_DATE));
         this.numberOfPages = JSONConverter.getNumber(changes.get(FIELD_NAME_NUMBER_OF_PAGES));
         this.price = JSONConverter.getNumber(changes.get(FIELD_NAME_PRICE));
         this.description = JSONConverter.getString(changes.get(FIELD_NAME_DESCRIPTION));
-        this.bookLibraryRefDataList = JSONConverter.getBookLibraryRefArray(changes.get(FIELD_NAME_BOOK_LIBRARY_REF_LIST));
     }
 
 }

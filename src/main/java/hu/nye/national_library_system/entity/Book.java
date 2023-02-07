@@ -74,10 +74,6 @@ public class Book {
             @Parameter(name = KEY_TYPE, value = SYSTEM_WIDE)})
     private String description;
 
-    @OneToMany(mappedBy = "library")
-    private List<BookLibraryRef> bookLibraryRefList;
-
-
     public Book(BookData bookData) {
         apply(bookData);
     }
@@ -91,10 +87,10 @@ public class Book {
         this.numberOfPages = ValueConverter.getNumberValue(bookData.getNumberOfPages(), this.numberOfPages);
         this.price = ValueConverter.getNumberValue(bookData.getPrice(), this.price);
         this.description = ValueConverter.getLongStringValue(bookData.getDescription(), this.description);
-        this.bookLibraryRefList = ValueConverter.getBookLibraryRefList(bookData.getBookLibraryRefDataList(), this.bookLibraryRefList);
+       // this.bookLibraryRefList = ValueConverter.getBookLibraryRefList(bookData.getBookLibraryRefDataList(), this.bookLibraryRefList);
     }
 
     public void setArrayFieldIds(String isbn) {
-        this.bookLibraryRefList = ValueConverter.setBookLibraryRefListIds(bookLibraryRefList, isbn, null);
+     //   this.bookLibraryRefList = ValueConverter.setBookLibraryRefListIds(bookLibraryRefList, isbn, null);
     }
 }

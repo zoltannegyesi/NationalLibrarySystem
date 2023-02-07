@@ -32,7 +32,7 @@ public class BookRepository extends NLSRepository{
     }
 
     public void saveArrayFields(Book book) {
-        saveArrayField(em, book.getBookLibraryRefList());
+        //saveArrayField(em, book.getBookLibraryRefList());
         em.flush();
     }
 
