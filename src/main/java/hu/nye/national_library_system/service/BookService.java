@@ -29,8 +29,6 @@ public class BookService {
 
     public Mono<Book> save(Book book) {
         String bookId = bookRepository.save(book);
-        book.setArrayFieldIds(bookId);
-        bookRepository.saveArrayFields(book);
         return Mono.just(bookRepository.getById(bookId));
     }
 
