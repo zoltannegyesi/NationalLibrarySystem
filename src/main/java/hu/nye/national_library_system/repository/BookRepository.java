@@ -25,17 +25,6 @@ public class BookRepository extends NLSRepository{
         return book.getIsbn();
     }
 
-    public Book merge(Book book) {
-        Book result = em.merge(book);
-        em.flush();
-        return result;
-    }
-
-    public void saveArrayFields(Book book) {
-        saveArrayField(em, book.getBookLibraryRefList());
-        em.flush();
-    }
-
     public Book update(Book book) {
         setNextId(em, Book.TYPE_NAME, book.getIsbn());
         return em.merge(book);

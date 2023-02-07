@@ -25,8 +25,7 @@ public class BookController {
     @GetMapping
     @ResponseBody
     public Flux<BookData> findAll() {
-        return Flux.empty();
-        //return bookService.findAll().map(BookData::new);
+        return bookService.findAll().map(BookData::new);
     }
 
     @GetMapping("/{id}")
