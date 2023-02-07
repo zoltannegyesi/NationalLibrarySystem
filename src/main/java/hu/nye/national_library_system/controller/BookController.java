@@ -11,7 +11,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/NationalLibrarySystem/Book")
+@RequestMapping("/Nls/Book")
 @Transactional
 public class BookController {
 
@@ -25,7 +25,8 @@ public class BookController {
     @GetMapping
     @ResponseBody
     public Flux<BookData> findAll() {
-        return bookService.findAll().map(BookData::new);
+        return Flux.empty();
+        //return bookService.findAll().map(BookData::new);
     }
 
     @GetMapping("/{id}")
