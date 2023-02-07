@@ -30,8 +30,6 @@ public class LibraryService {
 
     public Mono<Library> save(Library library) {
         Long libraryId = libraryRepository.save(library);
-        library.setArrayFieldIds(libraryId);
-        libraryRepository.saveArrayFields(library);
         return Mono.just(libraryRepository.getById(libraryId));
     }
 

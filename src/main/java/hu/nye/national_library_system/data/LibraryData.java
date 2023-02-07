@@ -24,15 +24,12 @@ public class LibraryData {
 
     private String closeTime;
 
-    private List<BookLibraryRefData> bookLibraryRefDataList;
-
     public LibraryData(Library library) {
         this.id = library.getId();
         this.name = JSONConverter.getString(library.getName());
         this.address = JSONConverter.getString(library.getAddress());
         this.openTime = JSONConverter.localTimeToString(library.getOpenTime());
         this.closeTime = JSONConverter.localTimeToString(library.getCloseTime());
-        this.bookLibraryRefDataList = JSONConverter.getBookLibraryRef(library.getBookLibraryRefList());
     }
 
     public LibraryData(ObjectNode changes) {
@@ -40,6 +37,5 @@ public class LibraryData {
         this.address = JSONConverter.getString(changes.get(FIELD_NAME_ADDRESS));
         this.openTime = JSONConverter.getTime(changes.get(FIELD_NAME_OPEN_TIME));
         this.closeTime = JSONConverter.getTime(changes.get(FIELD_NAME_CLOSE_TIME));
-        this.bookLibraryRefDataList = JSONConverter.getBookLibraryRefArray(changes.get(FIELD_NAME_BOOK_LIBRARY_REF_LIST));
     }
 }
