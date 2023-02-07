@@ -33,7 +33,6 @@ public class Book {
     public static final String FIELD_NAME_NUMBER_OF_PAGES = "numberOfPages";
     public static final String FIELD_NAME_PRICE = "price";
     public static final String FIELD_NAME_DESCRIPTION = "description";
-    public static final String FIELD_NAME_BOOK_LIBRARY_REF_LIST = "bookLibraryRefList";
 
     @Id
     @Column(name = "isbn", length = 13)

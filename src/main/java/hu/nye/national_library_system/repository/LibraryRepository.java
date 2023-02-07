@@ -25,17 +25,6 @@ public class LibraryRepository extends NLSRepository{
         return library.getId();
     }
 
-    public Library merge(Library library) {
-        Library result = em.merge(library);
-        em.flush();
-        return result;
-    }
-
-    public void saveArrayFields(Library library) {
-        saveArrayField(em, library.getBookLibraryRefList());
-        em.flush();
-    }
-
     public Library update(Library library) {
         setNextId(em, Library.TYPE_NAME, library.getId());
         return em.merge(library);

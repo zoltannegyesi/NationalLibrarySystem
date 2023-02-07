@@ -27,7 +27,6 @@ public class Library {
     public static final String FIELD_NAME_ADDRESS = "address";
     public static final String FIELD_NAME_OPEN_TIME = "openTime";
     public static final String FIELD_NAME_CLOSE_TIME = "closeTime";
-    public static final String FIELD_NAME_BOOK_LIBRARY_REF_LIST = "bookLibraryRefList";
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -53,9 +52,6 @@ public class Library {
             @org.hibernate.annotations.Parameter(name = KEY_TYPE, value = USER_WIDE)})
     private LocalTime closeTime;
 
-    @OneToMany(mappedBy = "book")
-    private List<BookLibraryRef> bookLibraryRefList;
-
     public Library(LibraryData libraryData) {
         apply(libraryData);
     }
@@ -65,10 +61,5 @@ public class Library {
         this.address = ValueConverter.getStringValue(libraryData.getAddress(), this.address);
         this.openTime = ValueConverter.getTimeValue(ValueConverter.stringToLocalTime(libraryData.getOpenTime()), this.openTime);
         this.closeTime = ValueConverter.getTimeValue(ValueConverter.stringToLocalTime(libraryData.getCloseTime()), this.closeTime);
-        this.bookLibraryRefList = ValueConverter.getBookLibraryRefList(libraryData.getBookLibraryRefDataList(), this.bookLibraryRefList);
-    }
-
-    public void setArrayFieldIds(Long id) {
-        this.bookLibraryRefList = ValueConverter.setBookLibraryRefListIds(bookLibraryRefList, null, id);
     }
 }
