@@ -15,6 +15,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.util.Arrays;
 import java.util.Base64;
 
 @Component
@@ -41,7 +42,7 @@ public class AESUtil {
 
     public byte[] encrypt(String key, byte[] input) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
             BadPaddingException, IllegalBlockSizeException, InvalidKeyException, InvalidKeySpecException {
-        SecretKey secretKey = createSecretKey(algorithm);
+        SecretKey secretKey = createSecretKey(key);
         Cipher cipher = Cipher.getInstance(algorithm);
         cipher.init(Cipher.ENCRYPT_MODE, secretKey, iv);
         byte[] cipherText = cipher.doFinal(input);
