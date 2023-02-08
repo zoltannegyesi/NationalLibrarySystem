@@ -8,9 +8,6 @@ import java.util.List;
 
 public class NLSRepository {
 
-    protected <T> void saveArrayField(EntityManager em, List<T> arrayField) {
-        arrayField.forEach(em::persist);
-    }
 
     protected <T> void setNextId(EntityManager em, String type, T value) {
         em.clear();

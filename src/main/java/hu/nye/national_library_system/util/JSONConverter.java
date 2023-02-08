@@ -4,11 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hu.nye.national_library_system.constant.Constants;
-import hu.nye.national_library_system.data.BookData;
-import hu.nye.national_library_system.data.LibraryBookData;
-import hu.nye.national_library_system.data.LibraryData;
+import hu.nye.national_library_system.data.*;
 import hu.nye.national_library_system.entity.Book;
-import hu.nye.national_library_system.entity.LibraryBook;
 import hu.nye.national_library_system.entity.Library;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +14,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 public class JSONConverter {
 
@@ -58,16 +51,20 @@ public class JSONConverter {
         return value.toString() + Constants.END_OF_TIMESTAMP_ISO;
     }
 
-    public static List<LibraryBookData> getBookLibraryRef(List<LibraryBook> array) {
-        return array.stream().map(LibraryBookData::new).collect(Collectors.toList());
-    }
-
     public static BookData getBook(Book book) {
         return new BookData(book);
     }
 
     public static LibraryData getLibrary(Library library) {
         return new LibraryData(library);
+    }
+
+    public static BookReference getBookLabel(Book book) {
+        return new BookReference(book.getIsbn(), book.getTitle());
+    }
+
+    public static LibraryReference getLibraryLabel(Library library) {
+        return new LibraryReference(library.getId(), library.getName());
     }
 
     public static String getString(JsonNode value) {
@@ -119,35 +116,24 @@ public class JSONConverter {
         return getString(value);
     }
 
-    public static <T> List<T> getArray(JsonNode array, Function<JsonNode, T> parse) {
-        if (array == null) {
-            return null;
-        }
-
-        return StreamSupport.stream(array.spliterator(), false).map(parse).collect(Collectors.toList());
+    public static BookReference getBookLabel(JsonNode value) {
+        return getLabelObject(value, BookReference.class, BookReference.TYPE_NAME);
     }
 
-    public static List<LibraryBookData> getBookLibraryRefArray(JsonNode array) {
-        if (array == null) {
-            return null;
-        }
-        return StreamSupport.stream(array.spliterator(), false).map(JSONConverter::getBookLibraryRef).collect(Collectors.toList());
+    public static LibraryReference getLibraryLabel(JsonNode value) {
+        return getLabelObject(value, LibraryReference.class, LibraryReference.TYPE_NAME);
     }
 
-    public static LibraryBookData getBookLibraryRef(JsonNode value) {
+    private static <T> T getLabelObject(JsonNode value, Class<T> objectType, String typeName) {
         if (value == null) {
             return null;
         }
-        return getObject(value, LibraryBookData.class);
-    }
-
-    private static <T> T getObject(JsonNode value, Class<T> type) {
         try {
-            T object = mapper.treeToValue(value, type);
-            return object;
+            return mapper.treeToValue(value, objectType);
         } catch (JsonProcessingException e) {
-            LOGGER.error("Error during JSON conversion ", e);
+            LOGGER.error(String.format("Cannot get %s from JsonNode", typeName));
             return null;
         }
     }
+
 }

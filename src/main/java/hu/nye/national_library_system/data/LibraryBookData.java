@@ -2,9 +2,11 @@ package hu.nye.national_library_system.data;
 
 import static hu.nye.national_library_system.entity.LibraryBook.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import hu.nye.national_library_system.entity.LibraryBook;
 import hu.nye.national_library_system.util.JSONConverter;
+import hu.nye.national_library_system.util.LibraryBookReferenceConverter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,31 +14,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LibraryBookData {
 
-    private String bookIsbn;
+    @JsonProperty("book")
+    private BookReference bookReference;
 
-    private Long libraryId;
-
-    private BookData bookData;
-
-    private LibraryData libraryData;
+    @JsonProperty("library")
+    private LibraryReference libraryReference;
 
     private Boolean available;
 
-    private String lending_date;
+    private String lendingDate;
 
     public LibraryBookData(LibraryBook libraryBook) {
-        this.bookIsbn = JSONConverter.getString(libraryBook.getId().getBookIsbn());
-        this.libraryId = JSONConverter.getNumber(libraryBook.getId().getLibraryId());
-        this.bookData = JSONConverter.getBook(libraryBook.getBook());
-        this.libraryData = JSONConverter.getLibrary(libraryBook.getLibrary());
-        this.available = JSONConverter.getBoolean(libraryBook.getAvailable());
-        this.lending_date = JSONConverter.localDateTimeToString(libraryBook.getLending_date());
+        this.bookReference = LibraryBookReferenceConverter.toBookReference(libraryBook.getBook());
+        this.libraryReference = LibraryBookReferenceConverter.toLibraryReference(libraryBook.getLibrary());
+        this.available = LibraryBookReferenceConverter.getBoolean(libraryBook.getAvailable());
+        this.lendingDate = LibraryBookReferenceConverter.getLocalDateTime(libraryBook.getLending_date());
     }
 
     public LibraryBookData(ObjectNode changes) {
-        this.bookIsbn = JSONConverter.getString(changes.get(FIELD_NAME_BOOK_ISBN));
-        this.libraryId = JSONConverter.getNumber(changes.get(FIELD_NAME_LIBRARY_ID));
-        this.available = JSONConverter.getBoolean(changes.get(FIELD_NAME_AVAILABLE));
-        this.lending_date = JSONConverter.getTimestamp(changes.get(FIELD_NAME_LENDING_DATE));
+        this.bookReference = LibraryBookReferenceConverter.BOOK_REFERENCE_FACTORY.getBookReference(changes.get(FIELD_NAME_BOOK));
+        this.libraryReference = LibraryBookReferenceConverter.LIBRARY_REFERENCE_FACTORY.getLibraryReference(changes.get(FIELD_NAME_LIBRARY));
+        this.available = LibraryBookReferenceConverter.getBoolean(changes.get(FIELD_NAME_AVAILABLE));
+        this.lendingDate = LibraryBookReferenceConverter.getLocalDateTime(changes.get(FIELD_NAME_LENDING_DATE));
     }
 }

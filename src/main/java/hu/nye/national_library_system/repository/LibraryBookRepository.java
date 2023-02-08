@@ -2,6 +2,7 @@ package hu.nye.national_library_system.repository;
 
 import hu.nye.national_library_system.entity.Library;
 import hu.nye.national_library_system.entity.LibraryBook;
+import hu.nye.national_library_system.entity.pk.LibraryBookPK;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,39 +21,39 @@ public class LibraryBookRepository extends NLSRepository{
     @PersistenceContext
     EntityManager em;
 
-    public Long save(Library library) {
-        em.persist(library);
+    public LibraryBookPK save(LibraryBook libraryBook) {
+        em.persist(libraryBook);
         em.flush();
-        return library.getId();
+        return libraryBook.getId();
     }
 
-    public Library update(Library library) {
-        setNextId(em, Library.TYPE_NAME, library.getId());
-        return em.merge(library);
+    public LibraryBook update(LibraryBook libraryBook) {
+        setNextId(em, LibraryBook.TYPE_NAME, libraryBook.getId());
+        return em.merge(libraryBook);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(LibraryBookPK id) {
         Library savedLibrary = em.find(Library.class, id);
         em.remove(savedLibrary);
         em.flush();
     }
 
-    public boolean notExistsById(Long id) {
+    public boolean notExistsById(LibraryBookPK id) {
         return em.find(Library.class, id) == null;
     }
 
     public List<LibraryBook> findAll() {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<LibraryBook> cq = criteriaBuilder.createQuery(LibraryBook.class);
-        Root<Library> library = cq.from(Library.class);
+        Root<LibraryBook> libraryBook = cq.from(LibraryBook.class);
         cq.distinct(true).
-                orderBy(criteriaBuilder.asc(library.get(Library.FIELD_NAME_NAME)));
+                orderBy(criteriaBuilder.asc(libraryBook.get("id")));
         TypedQuery<LibraryBook> query = em.createQuery(cq);
         return query.getResultList();
     }
 
-    public Library getById(Long id) {
-        return em.find(Library.class, id);
+    public LibraryBook getById(LibraryBookPK id) {
+        return em.find(LibraryBook.class, id);
     }
 
 }

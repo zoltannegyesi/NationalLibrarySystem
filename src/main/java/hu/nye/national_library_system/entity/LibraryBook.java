@@ -3,7 +3,10 @@ package hu.nye.national_library_system.entity;
 import static hu.nye.national_library_system.key.KeyTypeConstants.*;
 
 import hu.nye.national_library_system.data.LibraryBookData;
-import hu.nye.national_library_system.entity.pk.BookLibraryRefPK;
+import hu.nye.national_library_system.entity.pk.LibraryBookPK;
+import hu.nye.national_library_system.service.BookService;
+import hu.nye.national_library_system.service.LibraryService;
+import hu.nye.national_library_system.util.LibraryBookReferenceConverter;
 import hu.nye.national_library_system.util.ValueConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,13 +23,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class LibraryBook implements Serializable {
 
-    public static final String FIELD_NAME_BOOK_ISBN = "bookIsbn";
-    public static final String FIELD_NAME_LIBRARY_ID = "libraryId";
+    public static final String TYPE_NAME = "LibraryBook";
+
+    public static final String FIELD_NAME_BOOK = "book";
+
+    public static final String FIELD_NAME_LIBRARY = "library";
     public static final String FIELD_NAME_AVAILABLE = "available";
     public static final String FIELD_NAME_LENDING_DATE = "lendingDate";
 
     @EmbeddedId
-    private BookLibraryRefPK id;
+    private LibraryBookPK id;
 
     @ManyToOne
     @MapsId("bookIsbn")
@@ -38,7 +44,7 @@ public class LibraryBook implements Serializable {
     @JoinColumn(name = "library_id")
     private Library library;
 
-    @Column(name = "available",  columnDefinition = "TINYINT(1)")
+    @Column(name = "available")
     @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedBoolean", parameters = {
             @org.hibernate.annotations.Parameter(name = KEY_TYPE, value = GROUP_WIDE)})
     private Boolean available;
@@ -48,16 +54,15 @@ public class LibraryBook implements Serializable {
             @org.hibernate.annotations.Parameter(name = KEY_TYPE, value = USER_WIDE)})
     private LocalDateTime lending_date;
 
-    public LibraryBook(LibraryBookData libraryBookData) {
-        apply(libraryBookData);
+    public LibraryBook(LibraryBookData libraryBookData, BookService bookService, LibraryService libraryService) {
+        apply(libraryBookData, bookService, libraryService);
     }
 
-    public void apply(LibraryBookData libraryBookData) {
-        this.id.setBookIsbn(ValueConverter.getStringValue(libraryBookData.getBookIsbn(), this.id.getBookIsbn()));
-        this.id.setLibraryId(ValueConverter.getNumberValue(libraryBookData.getLibraryId(), this.id.getLibraryId()));
-        this.book = ValueConverter.getBookValue(libraryBookData.getBookData(), this.book);
-        this.library = ValueConverter.getLibraryValue(libraryBookData.getLibraryData(), this.library);
+    public void apply(LibraryBookData libraryBookData,  BookService bookService, LibraryService libraryService) {
+        this.id = LibraryBookReferenceConverter.getLibraryBookId(new LibraryBookPK(libraryBookData.getBookReference().getIsbn(), libraryBookData.getLibraryReference().getId()), this.id);
+        this.book = LibraryBookReferenceConverter.getBook(bookService, libraryBookData.getBookReference(), this.book);
+        this.library = LibraryBookReferenceConverter.getLibrary(libraryService, libraryBookData.getLibraryReference(), this.library);
         this.available = ValueConverter.getBooleanValue(libraryBookData.getAvailable(), this.available);
-        this.lending_date = ValueConverter.getTimestampValue(ValueConverter.stringToLocalDateTime(libraryBookData.getLending_date()), this.lending_date);
+        this.lending_date = ValueConverter.getTimestampValue(ValueConverter.stringToLocalDateTime(libraryBookData.getLendingDate()), this.lending_date);
     }
 }

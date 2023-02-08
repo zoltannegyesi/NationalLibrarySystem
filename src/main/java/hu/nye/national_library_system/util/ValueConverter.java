@@ -6,6 +6,7 @@ import hu.nye.national_library_system.data.LibraryData;
 import hu.nye.national_library_system.entity.Book;
 import hu.nye.national_library_system.entity.LibraryBook;
 import hu.nye.national_library_system.entity.Library;
+import hu.nye.national_library_system.entity.pk.LibraryBookPK;
 import org.hibernate.engine.jdbc.internal.BinaryStreamImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,18 +75,6 @@ public class ValueConverter {
         return getValue(value, defaultValue);
     }
 
-    public static Book getBookValue(BookData value, Book defaultValue) {
-        return value == null ?  defaultValue :  new Book(value);
-    }
-
-    public static Library getLibraryValue(LibraryData value, Library defaultValue) {
-        return value == null ?  defaultValue :  new Library(value);
-    }
-
-    public static List<LibraryBook> getBookLibraryRefList(List<LibraryBookData> dataArrayField, List<LibraryBook> arrayField) {
-        return null;
-    }
-
     public static LocalDate stringToLocalDate(String value) {
         if (value == null) {
             return null;
@@ -105,8 +94,10 @@ public class ValueConverter {
         if (value == null) {
             return null;
         }
+        //TODO: ha a frontendből timestampkét jön, visszaállítani
         // LocalDateTimes are 16 characters long.
-        return LocalDateTime.parse(correctDateString(value.substring(0, 16)));
+        //return LocalDateTime.parse(correctDateString(value.substring(0, 16)));
+        return LocalDateTime.of(2000, 1, 1, 1, 1);
     }
 
     private static String correctDateString(String original) {
@@ -123,4 +114,6 @@ public class ValueConverter {
         });
         return libraryBookList;
     }
+
+
 }

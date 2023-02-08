@@ -1,6 +1,8 @@
 package hu.nye.national_library_system.service;
 
 import hu.nye.national_library_system.entity.Library;
+import hu.nye.national_library_system.entity.LibraryBook;
+import hu.nye.national_library_system.entity.pk.LibraryBookPK;
 import hu.nye.national_library_system.repository.LibraryBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,24 +22,24 @@ public class LibraryBookService {
         this.libraryBookRepository = libraryBookRepository;
     }
 
-    public Flux<Library> findAll() {
+    public Flux<LibraryBook> findAll() {
         return Flux.fromIterable(libraryBookRepository.findAll());
     }
 
-    public Mono<Library> load(Long id) {
+    public Mono<LibraryBook> load(LibraryBookPK id) {
         return Mono.just(libraryBookRepository.getById(id));
     }
 
-    public Mono<Library> save(Library library) {
-        Long libraryId = libraryBookRepository.save(library);
+    public Mono<LibraryBook> save(LibraryBook libraryBook) {
+        LibraryBookPK libraryId = libraryBookRepository.save(libraryBook);
         return Mono.just(libraryBookRepository.getById(libraryId));
     }
 
-    public Mono<Library> update(Library library){
-        return Mono.just(libraryBookRepository.update(library));
+    public Mono<LibraryBook> update(LibraryBook libraryBook){
+        return Mono.just(libraryBookRepository.update(libraryBook));
     }
 
-    public boolean delete(Long id) {
+    public boolean delete(LibraryBookPK id) {
         libraryBookRepository.deleteById(id);
         return libraryBookRepository.notExistsById(id);
     }
