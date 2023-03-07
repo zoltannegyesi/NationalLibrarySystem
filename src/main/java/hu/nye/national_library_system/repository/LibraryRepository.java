@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class LibraryRepository extends NLSRepository{
+public class LibraryRepository {
 
     @PersistenceContext
     EntityManager em;
@@ -26,7 +26,6 @@ public class LibraryRepository extends NLSRepository{
     }
 
     public Library update(Library library) {
-        setNextId(em, Library.TYPE_NAME, library.getId());
         return em.merge(library);
     }
 
