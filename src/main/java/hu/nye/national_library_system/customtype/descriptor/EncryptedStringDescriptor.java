@@ -1,9 +1,7 @@
 package hu.nye.national_library_system.customtype.descriptor;
 
 import hu.nye.national_library_system.util.EncryptionUtil;
-import hu.nye.national_library_system.util.ValueConverter;
 import org.hibernate.type.descriptor.WrapperOptions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.BadPaddingException;
@@ -29,6 +27,7 @@ public class EncryptedStringDescriptor extends EncryptedDescriptor<String> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <X> X unwrap(String value, Class<X> type, WrapperOptions options) {
         if (value == null) {
             return null;

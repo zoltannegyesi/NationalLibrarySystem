@@ -27,6 +27,7 @@ public class EncryptedLongStringDescriptor extends EncryptedDescriptor<String> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <X> X unwrap(String value, Class<X> type, WrapperOptions options) {
         if (value == null) {
             return null;

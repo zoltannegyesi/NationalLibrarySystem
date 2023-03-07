@@ -29,6 +29,7 @@ public class EncryptedTimeDescriptor extends EncryptedDescriptor<LocalTime> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <X> X unwrap(LocalTime value, Class<X> type, WrapperOptions options) {
         if (value == null) {
             return null;

@@ -5,7 +5,6 @@ import static hu.nye.national_library_system.entity.LibraryBook.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import hu.nye.national_library_system.entity.LibraryBook;
-import hu.nye.national_library_system.util.JSONConverter;
 import hu.nye.national_library_system.util.LibraryBookReferenceConverter;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -28,6 +28,7 @@ public class EncryptedFractionDescriptor extends EncryptedDescriptor<BigDecimal>
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <X> X unwrap(BigDecimal value, Class<X> type, WrapperOptions options) {
         if (value == null) {
             return null;

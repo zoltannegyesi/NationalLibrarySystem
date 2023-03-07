@@ -1,7 +1,5 @@
 package hu.nye.national_library_system.key;
 
-import static org.springframework.context.annotation.ScopedProxyMode.TARGET_CLASS;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
