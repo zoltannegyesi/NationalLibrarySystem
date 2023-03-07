@@ -88,4 +88,6 @@ public class Book {
         this.description = ValueConverter.getLongStringValue(bookData.getDescription(), this.description);
     }
 
+    //TODO: ha törlik a book-ot, amit a LibraryBook tartalmaz, akkor azokat a LibraryBook-okat is törölni. Ezt valami cascade-vel, vagy deleteorphannal.
+
 }

@@ -1,11 +1,12 @@
 package hu.nye.national_library_system.util;
 
 import hu.nye.national_library_system.data.BookData;
-import hu.nye.national_library_system.data.BookLibraryRefData;
+import hu.nye.national_library_system.data.LibraryBookData;
 import hu.nye.national_library_system.data.LibraryData;
 import hu.nye.national_library_system.entity.Book;
-import hu.nye.national_library_system.entity.BookLibraryRef;
+import hu.nye.national_library_system.entity.LibraryBook;
 import hu.nye.national_library_system.entity.Library;
+import hu.nye.national_library_system.entity.pk.LibraryBookPK;
 import org.hibernate.engine.jdbc.internal.BinaryStreamImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,18 +75,6 @@ public class ValueConverter {
         return getValue(value, defaultValue);
     }
 
-    public static Book getBookValue(BookData value, Book defaultValue) {
-        return value == null ?  defaultValue :  new Book(value);
-    }
-
-    public static Library getLibraryValue(LibraryData value, Library defaultValue) {
-        return value == null ?  defaultValue :  new Library(value);
-    }
-
-    public static List<BookLibraryRef> getBookLibraryRefList(List<BookLibraryRefData> dataArrayField, List<BookLibraryRef> arrayField) {
-        return null;
-    }
-
     public static LocalDate stringToLocalDate(String value) {
         if (value == null) {
             return null;
@@ -105,8 +94,10 @@ public class ValueConverter {
         if (value == null) {
             return null;
         }
+        //TODO: ha a frontendből timestampkét jön, visszaállítani
         // LocalDateTimes are 16 characters long.
-        return LocalDateTime.parse(correctDateString(value.substring(0, 16)));
+        //return LocalDateTime.parse(correctDateString(value.substring(0, 16)));
+        return LocalDateTime.of(2000, 1, 1, 1, 1);
     }
 
     private static String correctDateString(String original) {
@@ -116,11 +107,13 @@ public class ValueConverter {
         return original;
     }
 
-    public static List<BookLibraryRef> setBookLibraryRefListIds(List<BookLibraryRef> bookLibraryRefList, String bookIsbn, Long libraryId) {
-        bookLibraryRefList.forEach(ref -> {
+    public static List<LibraryBook> setBookLibraryRefListIds(List<LibraryBook> libraryBookList, String bookIsbn, Long libraryId) {
+        libraryBookList.forEach(ref -> {
             ref.getId().setBookIsbn(bookIsbn);
             ref.getId().setLibraryId(libraryId);
         });
-        return bookLibraryRefList;
+        return libraryBookList;
     }
+
+
 }
