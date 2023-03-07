@@ -73,6 +73,9 @@ public class Book {
             @Parameter(name = KEY_TYPE, value = SYSTEM_WIDE)})
     private String description;
 
+    @OneToMany(mappedBy = "book", orphanRemoval = true)
+    private List<BookLibraryRef> libraryBooks;
+
     public Book(BookData bookData) {
         apply(bookData);
     }

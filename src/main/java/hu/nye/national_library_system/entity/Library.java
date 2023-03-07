@@ -52,6 +52,9 @@ public class Library {
             @org.hibernate.annotations.Parameter(name = KEY_TYPE, value = USER_WIDE)})
     private LocalTime closeTime;
 
+    @OneToMany(mappedBy = "library", orphanRemoval = true)
+    private List<BookLibraryRef> libraryBooks;
+
     public Library(LibraryData libraryData) {
         apply(libraryData);
     }
