@@ -9,6 +9,8 @@ import hu.nye.national_library_system.util.ValueConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -51,6 +53,9 @@ public class Library {
     @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedTime", parameters = {
             @org.hibernate.annotations.Parameter(name = KEY_TYPE, value = USER_WIDE)})
     private LocalTime closeTime;
+
+    @OneToMany(mappedBy = "library", orphanRemoval = true)
+    @ToString.Exclude private List<LibraryBook> libraryBooks;
 
     public Library(LibraryData libraryData) {
         apply(libraryData);

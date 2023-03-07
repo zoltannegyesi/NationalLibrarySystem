@@ -45,9 +45,7 @@ public class LibraryBookController {
     @PostMapping
     @ResponseBody
     public Mono<LibraryBookData> save(@RequestBody LibraryBookData data){
-        System.out.println(data.toString());
         LibraryBook libraryBook = new LibraryBook(data, bookService, libraryService);
-        System.out.println(libraryBook.toString());
         return libraryBookService.save(libraryBook).map(LibraryBookData::new);
     }
 

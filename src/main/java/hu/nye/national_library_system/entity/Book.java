@@ -7,6 +7,8 @@ import hu.nye.national_library_system.util.ValueConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 
@@ -72,6 +74,9 @@ public class Book {
     @Type(type = "hu.nye.national_library_system.customtype.type.EncryptedLongString", parameters = {
             @Parameter(name = KEY_TYPE, value = SYSTEM_WIDE)})
     private String description;
+
+    @OneToMany(mappedBy = "book", orphanRemoval = true)
+    @ToString.Exclude private List<LibraryBook> libraryBooks;
 
     public Book(BookData bookData) {
         apply(bookData);
