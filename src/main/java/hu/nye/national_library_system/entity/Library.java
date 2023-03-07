@@ -9,6 +9,8 @@ import hu.nye.national_library_system.util.ValueConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -53,7 +55,7 @@ public class Library {
     private LocalTime closeTime;
 
     @OneToMany(mappedBy = "library", orphanRemoval = true)
-    private List<BookLibraryRef> libraryBooks;
+    @ToString.Exclude private List<LibraryBook> libraryBooks;
 
     public Library(LibraryData libraryData) {
         apply(libraryData);
