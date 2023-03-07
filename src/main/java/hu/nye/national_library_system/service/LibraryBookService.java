@@ -1,6 +1,5 @@
 package hu.nye.national_library_system.service;
 
-import hu.nye.national_library_system.entity.Library;
 import hu.nye.national_library_system.entity.LibraryBook;
 import hu.nye.national_library_system.entity.pk.LibraryBookPK;
 import hu.nye.national_library_system.repository.LibraryBookRepository;

@@ -8,8 +8,6 @@ import hu.nye.national_library_system.util.JSONConverter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 public class LibraryData {

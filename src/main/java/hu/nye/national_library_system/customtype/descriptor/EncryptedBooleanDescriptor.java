@@ -1,7 +1,6 @@
 package hu.nye.national_library_system.customtype.descriptor;
 
 import hu.nye.national_library_system.util.EncryptionUtil;
-import hu.nye.national_library_system.util.ValueConverter;
 import org.hibernate.type.descriptor.WrapperOptions;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +27,7 @@ public class EncryptedBooleanDescriptor extends EncryptedDescriptor<Boolean> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <X> X unwrap(Boolean value, Class<X> type, WrapperOptions options) {
         if (value == null) {
             return null;

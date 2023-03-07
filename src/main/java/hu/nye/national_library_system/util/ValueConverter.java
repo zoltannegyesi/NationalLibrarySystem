@@ -1,12 +1,6 @@
 package hu.nye.national_library_system.util;
 
-import hu.nye.national_library_system.data.BookData;
-import hu.nye.national_library_system.data.LibraryBookData;
-import hu.nye.national_library_system.data.LibraryData;
-import hu.nye.national_library_system.entity.Book;
 import hu.nye.national_library_system.entity.LibraryBook;
-import hu.nye.national_library_system.entity.Library;
-import hu.nye.national_library_system.entity.pk.LibraryBookPK;
 import org.hibernate.engine.jdbc.internal.BinaryStreamImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,10 +88,8 @@ public class ValueConverter {
         if (value == null) {
             return null;
         }
-        //TODO: ha a frontendből timestampkét jön, visszaállítani
-        // LocalDateTimes are 16 characters long.
-        //return LocalDateTime.parse(correctDateString(value.substring(0, 16)));
-        return LocalDateTime.of(2000, 1, 1, 1, 1);
+        //LocalDateTimes are 16 characters long.
+        return LocalDateTime.parse(correctDateString(value.substring(0, 16)));
     }
 
     private static String correctDateString(String original) {

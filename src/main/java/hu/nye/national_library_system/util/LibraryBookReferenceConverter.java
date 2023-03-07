@@ -1,7 +1,6 @@
 package hu.nye.national_library_system.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import hu.nye.national_library_system.constant.Constants;
 import hu.nye.national_library_system.data.BookReference;
 import hu.nye.national_library_system.data.LibraryReference;
 import hu.nye.national_library_system.entity.Book;

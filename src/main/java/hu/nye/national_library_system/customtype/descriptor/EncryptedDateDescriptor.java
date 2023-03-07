@@ -29,6 +29,7 @@ public class EncryptedDateDescriptor extends EncryptedDescriptor<LocalDate> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <X> X unwrap(LocalDate value, Class<X> type, WrapperOptions options) {
         if (value == null) {
             return null;
