@@ -1,4 +1,4 @@
-package hu.nye.national_library_system.key;
+package hu.nye.national_library_system.etc;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

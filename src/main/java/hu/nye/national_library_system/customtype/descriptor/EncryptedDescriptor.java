@@ -1,8 +1,8 @@
 package hu.nye.national_library_system.customtype.descriptor;
 
-import static hu.nye.national_library_system.key.KeyTypeConstants.*;
+import static hu.nye.national_library_system.etc.KeyTypeConstants.*;
 
-import hu.nye.national_library_system.key.KeyHolder;
+import hu.nye.national_library_system.etc.KeyHolder;
 import org.hibernate.type.descriptor.java.AbstractTypeDescriptor;
 import org.hibernate.type.descriptor.java.ImmutableMutabilityPlan;
 import org.slf4j.Logger;
@@ -16,9 +16,9 @@ public abstract class EncryptedDescriptor<T> extends AbstractTypeDescriptor<T> {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(EncryptedDescriptor.class);
 
-    private static transient ApplicationContext applicationContext;
+    private static ApplicationContext applicationContext;
 
-    private transient String keyType;
+    private String keyType;
 
     @SuppressWarnings("unchecked")
     protected EncryptedDescriptor(Class<T> type) {

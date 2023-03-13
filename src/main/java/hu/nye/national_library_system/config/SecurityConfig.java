@@ -18,7 +18,7 @@ public class SecurityConfig {
     private String originUrl;
 
     @Bean
-    public SecurityFilterChain configure(HttpSecurity http) throws Exception{
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests().anyRequest().permitAll().and().csrf()
                 .disable().cors().configurationSource(req-> setCorsConfiguration());
     return http.build();

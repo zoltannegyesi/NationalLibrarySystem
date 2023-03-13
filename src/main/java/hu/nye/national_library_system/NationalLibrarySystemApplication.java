@@ -1,6 +1,6 @@
 package hu.nye.national_library_system;
 
-import hu.nye.national_library_system.key.KeyHolder;
+import hu.nye.national_library_system.etc.KeyHolder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;

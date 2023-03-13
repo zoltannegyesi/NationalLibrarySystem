@@ -20,10 +20,6 @@ public class ValueConverter {
     private ValueConverter() {
     }
 
-    public static BinaryStreamImpl toBinaryStream(String value) {
-        return new BinaryStreamImpl(value.getBytes());
-    }
-
     public static String toString(Blob value) {
         try {
             return new String(value.getBytes(1, (int) value.length()));
@@ -98,14 +94,4 @@ public class ValueConverter {
         }
         return original;
     }
-
-    public static List<LibraryBook> setBookLibraryRefListIds(List<LibraryBook> libraryBookList, String bookIsbn, Long libraryId) {
-        libraryBookList.forEach(ref -> {
-            ref.getId().setBookIsbn(bookIsbn);
-            ref.getId().setLibraryId(libraryId);
-        });
-        return libraryBookList;
-    }
-
-
 }

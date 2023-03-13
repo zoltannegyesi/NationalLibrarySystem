@@ -14,5 +14,3 @@ public class UserController {
         return token;
     }
 }
-
-//TODO: nem id-t küldeni, hanem label + id
