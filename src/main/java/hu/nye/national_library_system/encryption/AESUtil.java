@@ -1,4 +1,4 @@
-package hu.nye.national_library_system.util;
+package hu.nye.national_library_system.encryption;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

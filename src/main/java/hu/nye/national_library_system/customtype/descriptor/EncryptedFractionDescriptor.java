@@ -1,6 +1,6 @@
 package hu.nye.national_library_system.customtype.descriptor;
 
-import hu.nye.national_library_system.util.EncryptionUtil;
+import hu.nye.national_library_system.encryption.EncryptionUtil;
 import org.hibernate.type.descriptor.WrapperOptions;
 import org.springframework.stereotype.Component;
 

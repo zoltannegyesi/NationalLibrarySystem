@@ -1,4 +1,4 @@
-package hu.nye.national_library_system.util;
+package hu.nye.national_library_system.encryption;
 
 import org.hibernate.engine.jdbc.internal.BinaryStreamImpl;
 import org.springframework.beans.BeansException;
@@ -26,10 +26,6 @@ public class EncryptionUtil implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext context) throws BeansException {
         EncryptionUtil.aesUtil = context.getBean(AESUtil.class);
-    }
-
-    public static SecretKey encryptKey(String input) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        return aesUtil.createSecretKey(input);
     }
 
     public static BinaryStreamImpl encrypt(String key, String input)  throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
@@ -74,12 +70,6 @@ public class EncryptionUtil implements ApplicationContextAware {
         return encrypt(key, inputBytes);
     }
 
-    public static BinaryStreamImpl encrypt(String key, Blob input)  throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
-            BadPaddingException, IllegalBlockSizeException, InvalidKeyException, InvalidKeySpecException, SQLException {
-        byte[] inputBytes = EncryptionConverter.toBytes(input);
-        return encrypt(key, inputBytes);
-    }
-
     public static String decryptToString(String key, Blob cipher) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
             BadPaddingException, IllegalBlockSizeException, InvalidKeyException, InvalidKeySpecException, SQLException{
         byte[] decryptedBytes = decrypt(key, cipher);
@@ -120,12 +110,6 @@ public class EncryptionUtil implements ApplicationContextAware {
             BadPaddingException, IllegalBlockSizeException, InvalidKeyException, InvalidKeySpecException, SQLException{
         byte[] decryptedBytes = decrypt(key, cipher);
         return EncryptionConverter.toLocalDateTime(decryptedBytes);
-    }
-
-    public static Blob decryptToBlob(String key, Blob cipher) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
-            BadPaddingException, IllegalBlockSizeException, InvalidKeyException, InvalidKeySpecException, SQLException{
-        byte[] decryptedBytes = decrypt(key, cipher);
-        return EncryptionConverter.toBlob(decryptedBytes);
     }
 
     private static BinaryStreamImpl encrypt(String key, byte[] input)  throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,

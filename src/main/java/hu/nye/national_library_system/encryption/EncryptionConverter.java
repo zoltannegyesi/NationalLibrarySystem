@@ -1,4 +1,6 @@
-package hu.nye.national_library_system.util;
+package hu.nye.national_library_system.encryption;
+
+import hu.nye.national_library_system.util.ValueConverter;
 
 import javax.sql.rowset.serial.SerialBlob;
 import java.math.BigDecimal;
