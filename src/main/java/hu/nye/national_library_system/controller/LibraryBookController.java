@@ -39,7 +39,7 @@ public class LibraryBookController {
     @GetMapping("/{id}")
     @ResponseBody
     public Mono<LibraryBookData> load(@PathVariable("id") Long id) {
-        return libraryBookService.load(null).map(LibraryBookData::new);
+        return libraryBookService.load(id).map(LibraryBookData::new);
     }
 
     @PostMapping
@@ -52,7 +52,7 @@ public class LibraryBookController {
     @PutMapping("/{id}")
     @ResponseBody
     public Mono<LibraryBookData> update(@PathVariable("id") Long id, @RequestBody LibraryBookData changes) {
-        LibraryBook libraryBook = libraryBookService.load(null).block();
+        LibraryBook libraryBook = libraryBookService.load(id).block();
         if (libraryBook == null) {
             return null;
         }
@@ -69,6 +69,6 @@ public class LibraryBookController {
     @DeleteMapping("/{id}")
     @ResponseBody
     public boolean delete(@PathVariable("id") Long id) {
-        return libraryBookService.delete(null);
+        return libraryBookService.delete(id);
     }
 }

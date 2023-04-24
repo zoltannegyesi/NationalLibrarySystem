@@ -1,6 +1,5 @@
 package hu.nye.national_library_system.util;
 
-import hu.nye.national_library_system.entity.LibraryBook;
 import org.hibernate.engine.jdbc.internal.BinaryStreamImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
 
 public class ValueConverter {
 
@@ -98,14 +96,4 @@ public class ValueConverter {
         }
         return original;
     }
-
-    public static List<LibraryBook> setBookLibraryRefListIds(List<LibraryBook> libraryBookList, String bookIsbn, Long libraryId) {
-        libraryBookList.forEach(ref -> {
-            ref.getId().setBookIsbn(bookIsbn);
-            ref.getId().setLibraryId(libraryId);
-        });
-        return libraryBookList;
-    }
-
-
 }

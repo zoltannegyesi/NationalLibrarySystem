@@ -2,7 +2,6 @@ package hu.nye.national_library_system.repository;
 
 import hu.nye.national_library_system.entity.Library;
 import hu.nye.national_library_system.entity.LibraryBook;
-import hu.nye.national_library_system.entity.pk.LibraryBookPK;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +20,7 @@ public class LibraryBookRepository{
     @PersistenceContext
     EntityManager em;
 
-    public LibraryBookPK save(LibraryBook libraryBook) {
+    public Long save(LibraryBook libraryBook) {
         em.persist(libraryBook);
         em.flush();
         return libraryBook.getId();
@@ -31,13 +30,13 @@ public class LibraryBookRepository{
         return em.merge(libraryBook);
     }
 
-    public void deleteById(LibraryBookPK id) {
-        Library savedLibrary = em.find(Library.class, id);
+    public void deleteById(Long id) {
+        LibraryBook savedLibrary = em.find(LibraryBook.class, id);
         em.remove(savedLibrary);
         em.flush();
     }
 
-    public boolean notExistsById(LibraryBookPK id) {
+    public boolean notExistsById(Long id) {
         return em.find(Library.class, id) == null;
     }
 
@@ -51,7 +50,7 @@ public class LibraryBookRepository{
         return query.getResultList();
     }
 
-    public LibraryBook getById(LibraryBookPK id) {
+    public LibraryBook getById(Long id) {
         return em.find(LibraryBook.class, id);
     }
 

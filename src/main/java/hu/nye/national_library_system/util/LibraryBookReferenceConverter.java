@@ -5,7 +5,6 @@ import hu.nye.national_library_system.data.BookReference;
 import hu.nye.national_library_system.data.LibraryReference;
 import hu.nye.national_library_system.entity.Book;
 import hu.nye.national_library_system.entity.Library;
-import hu.nye.national_library_system.entity.pk.LibraryBookPK;
 import hu.nye.national_library_system.service.BookService;
 import hu.nye.national_library_system.service.LibraryService;
 
@@ -34,12 +33,20 @@ public class LibraryBookReferenceConverter {
         return new LibraryReference(library.getId(), library.getName());
     }
 
+    public static Long getNumber(Long value) {
+        return JSONConverter.getNumber(value);
+    }
+
     public static Boolean getBoolean(Boolean value) {
         return JSONConverter.getBoolean(value);
     }
 
     public static String getLocalDateTime(LocalDateTime value) {
         return JSONConverter.localDateTimeToString(value);
+    }
+
+    public static Long getNumber(JsonNode value) {
+        return JSONConverter.getNumber(value);
     }
 
     public static Boolean getBoolean(JsonNode value) {
@@ -50,10 +57,6 @@ public class LibraryBookReferenceConverter {
         return JSONConverter.getTimestamp(value);
     }
 
-
-    public static LibraryBookPK getLibraryBookId(LibraryBookPK value, LibraryBookPK defaultValue) {
-        return ValueConverter.getValue(value, defaultValue);
-    }
 
     public static Book getBook(BookService bookService, BookReference bookReference, Book defaultValue) {
         if (bookReference == null) {

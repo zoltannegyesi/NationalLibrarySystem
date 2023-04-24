@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LibraryBookData {
 
+    private Long id;
+
     @JsonProperty("book")
     private BookReference bookReference;
 
@@ -24,6 +26,7 @@ public class LibraryBookData {
     private String lendingDate;
 
     public LibraryBookData(LibraryBook libraryBook) {
+        this.id = LibraryBookReferenceConverter.getNumber(libraryBook.getId());
         this.bookReference = LibraryBookReferenceConverter.toBookReference(libraryBook.getBook());
         this.libraryReference = LibraryBookReferenceConverter.toLibraryReference(libraryBook.getLibrary());
         this.available = LibraryBookReferenceConverter.getBoolean(libraryBook.getAvailable());
@@ -31,6 +34,7 @@ public class LibraryBookData {
     }
 
     public LibraryBookData(ObjectNode changes) {
+        this.id = LibraryBookReferenceConverter.getNumber(changes.get(FIELD_NAME_ID));
         this.bookReference = LibraryBookReferenceConverter.BOOK_REFERENCE_FACTORY.getBookReference(changes.get(FIELD_NAME_BOOK));
         this.libraryReference = LibraryBookReferenceConverter.LIBRARY_REFERENCE_FACTORY.getLibraryReference(changes.get(FIELD_NAME_LIBRARY));
         this.available = LibraryBookReferenceConverter.getBoolean(changes.get(FIELD_NAME_AVAILABLE));
