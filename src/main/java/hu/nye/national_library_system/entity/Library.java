@@ -6,7 +6,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import hu.nye.national_library_system.data.LibraryData;
 import hu.nye.national_library_system.util.ValueConverter;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -20,7 +19,6 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Library {
 
     public static final String TYPE_NAME = "Library";

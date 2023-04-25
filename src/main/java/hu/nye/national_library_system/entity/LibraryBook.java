@@ -8,7 +8,6 @@ import hu.nye.national_library_system.service.BookService;
 import hu.nye.national_library_system.service.LibraryService;
 import hu.nye.national_library_system.util.LibraryBookReferenceConverter;
 import hu.nye.national_library_system.util.ValueConverter;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
@@ -20,7 +19,6 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class LibraryBook implements Serializable {
 
     public static final String TYPE_NAME = "LibraryBook";

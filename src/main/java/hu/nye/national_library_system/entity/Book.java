@@ -4,7 +4,6 @@ import static hu.nye.national_library_system.key.KeyTypeConstants.*;
 
 import hu.nye.national_library_system.data.BookData;
 import hu.nye.national_library_system.util.ValueConverter;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -23,7 +22,6 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Book {
 
     public static final String TYPE_NAME = "Book";
